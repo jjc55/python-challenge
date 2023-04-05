@@ -12,6 +12,7 @@ previous = int(0)
 greatest_increase = int(0)
 greatest_increase_date = str("")
 greatest_decrease = int(0)
+greatest_decrease_date = str("")
 
 with open (budget_data, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
@@ -29,16 +30,25 @@ with open (budget_data, "r") as csvfile:
             months_list.append(row[0])
         previous = int(row[1])
             
-    average_change = sum(changes_list)/len(changes_list)      
-        #append the monthly change=next row profit/loss - the current row's loss and the date 
-        #add to monthly_change dictionary {change:date} or 2 separate lists}
-        #iterate through and find the greatest increase and greatest decrease
-           
-    print(f"Total Months: {months}")
-    print(f"Total: ${net_total}")
-    print(f"Average change: ${average_change:0.2f}")
-    print(f"Greatest Increase in Profits:()")
-    print(f"Greatest Decrease in Profits:()")
+    average_change = sum(changes_list)/len(changes_list) 
+    
+    greatest_increase = max(changes_list)
+    index_greatest_increase = changes_list.index(max(changes_list))
+    greatest_increase_date = months_list[index_greatest_increase]
+    
+    greatest_decrease = min(changes_list) 
+    index_greatest_decrease = changes_list.index(min(changes_list))
+    greatest_decrease_date = months_list[index_greatest_decrease]    
+    
+    with open(os.path.join("output-file.txt"), "w") as textfile:
+        textfile.write("Financial Analysis")
+        textfile.write(" \n") 
+        textfile.write("--------------------------- \n")       
+        textfile.write(f"Total Months: {months}\n")
+        textfile.write(f"Total: ${net_total}\n")
+        textfile.write(f"Average change: ${average_change:0.2f}\n")
+        textfile.write(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})\n")
+        textfile.write(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})\n")
     
     
     
