@@ -40,7 +40,7 @@ with open (budget_data, "r") as csvfile:
     index_greatest_decrease = changes_list.index(min(changes_list))
     greatest_decrease_date = months_list[index_greatest_decrease]    
     
-    with open(os.path.join("output-file.txt"), "w") as textfile:
+    with open(os.path.join("PyBank-output-file.txt"), "w") as textfile:
         textfile.write("Financial Analysis")
         textfile.write(" \n") 
         textfile.write("--------------------------- \n")       
@@ -49,6 +49,4 @@ with open (budget_data, "r") as csvfile:
         textfile.write(f"Average change: ${average_change:0.2f}\n")
         textfile.write(f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})\n")
         textfile.write(f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})\n")
-    
-    
-    
+        

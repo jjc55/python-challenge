@@ -25,14 +25,24 @@ with open (election_data, 'r') as csvfile:
             candidate_votes[row[2]] = 1
         else:
             candidate_votes[row[2]] = candidate_votes[row[2]] + 1
-        
-    print(f"Election Results")
-    print(f"-------------------")
-    print(f"Total Votes: {votes}")
-    print(f"-------------------")
-    for key in candidate_votes:
-        percentage = (candidate_votes[key]/votes)*100
-        print(key, '',("{:0.3f}" .format(percentage)),"%" ,'', candidate_votes[key])
-    print(f"-------------------")
-    print(f"Winner: ")
+            
+    max_votes_for = max(candidate_votes, key=candidate_votes.get)
+   
     
+    with open(os.path.join("Pypoll-output-file.txt"), "w") as textfile:
+        textfile.write(f"Election Results \n")
+        textfile.write(f"------------------- \n")
+        textfile.write(f"Total Votes: {votes} \n")
+        textfile.write(f"------------------- \n")     
+       
+        for key in candidate_votes:
+            percentage = (candidate_votes[key]/votes)*100
+            percentage2 = ("{:0.3f}" .format(percentage))
+            percentage3 = (f"{percentage2}%")
+            #print(percentage3)
+            #print(key,percentage2, "%" , candidate_votes[key])
+            stored_value = str(f"{key}: {percentage3} ({candidate_votes[key]})")
+            #print(f"{stored_value}")
+            textfile.write(f"{stored_value} \n")  
+        textfile.write(f"------------------- \n")  
+        textfile.write(f"Winner: {max_votes_for} \n")
