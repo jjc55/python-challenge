@@ -1,8 +1,11 @@
+#Import dependencies 
 import os
 import csv
 
+#Specifies where CSV file on budget data is located and assigns it to variable "budget_data"
 budget_data = os.path.join(".","Resources","budget_data.csv")
 
+#Initializes different variables that will be used later on in the code
 months = int(0)
 net_total = int(0)
 monthly_change = int(0)
@@ -14,14 +17,16 @@ greatest_increase_date = str("")
 greatest_decrease = int(0)
 greatest_decrease_date = str("")
 
+#Opens budget_data as a read only file as variable name "csvfile", makes sure csvfile is read with a
+#comma as the delimiter, and stores the header information in variable name "csv_header"
 with open (budget_data, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
     csv_header = next(csvreader)
 
+#Iterates through the rows within csvreader and counts the number of months, net total, profits/losses
+#from month to month, max/min in profits/losses, stores this information in a variable that can also be
+#a list
     for index, row in enumerate(csvreader):
-        # index = 0, row = ["jan - 10", "1088983"]
-        # index = 1, row = ["feb - 10", "-354534"]
-        # ETC.
         months = months + 1
         net_total = net_total + int(row[1])
         if index > 0:
@@ -39,7 +44,8 @@ with open (budget_data, "r") as csvfile:
     greatest_decrease = min(changes_list) 
     index_greatest_decrease = changes_list.index(min(changes_list))
     greatest_decrease_date = months_list[index_greatest_decrease]    
-    
+
+#Creates and writes output in PyBank-output-file located within the Analysis folder
     with open(os.path.join("Analysis", "PyBank-output-file.txt"), "w") as textfile:
         textfile.write("Financial Analysis")
         textfile.write(" \n") 
