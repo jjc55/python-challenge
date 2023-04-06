@@ -40,7 +40,7 @@ with open (budget_data, "r") as csvfile:
     index_greatest_decrease = changes_list.index(min(changes_list))
     greatest_decrease_date = months_list[index_greatest_decrease]    
     
-    with open(os.path.join("PyBank-output-file.txt"), "w") as textfile:
+    with open(os.path.join("Analysis", "PyBank-output-file.txt"), "w") as textfile:
         textfile.write("Financial Analysis")
         textfile.write(" \n") 
         textfile.write("--------------------------- \n")       

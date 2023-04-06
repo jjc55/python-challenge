@@ -28,8 +28,8 @@ with open (election_data, 'r') as csvfile:
             
     max_votes_for = max(candidate_votes, key=candidate_votes.get)
    
-    
-    with open(os.path.join("Pypoll-output-file.txt"), "w") as textfile:
+    #(".."/PyBank/Analysis/name of file.txt) REMOVE
+    with open(os.path.join("Analysis", "Pypoll-output-file.txt"), "w") as textfile:
         textfile.write(f"Election Results \n")
         textfile.write(f"------------------- \n")
         textfile.write(f"Total Votes: {votes} \n")
@@ -39,10 +39,8 @@ with open (election_data, 'r') as csvfile:
             percentage = (candidate_votes[key]/votes)*100
             percentage2 = ("{:0.3f}" .format(percentage))
             percentage3 = (f"{percentage2}%")
-            #print(percentage3)
-            #print(key,percentage2, "%" , candidate_votes[key])
             stored_value = str(f"{key}: {percentage3} ({candidate_votes[key]})")
-            #print(f"{stored_value}")
             textfile.write(f"{stored_value} \n")  
+            
         textfile.write(f"------------------- \n")  
         textfile.write(f"Winner: {max_votes_for} \n")
